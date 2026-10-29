@@ -234,6 +234,74 @@
       </section>
     </section>
 
+    <section id="add-book" class="action-card" style="margin: 28px 0;">
+      <h2>📖 Share a book</h2>
+      <p>Add a book to try out the form.</p>
+
+      <form id="addBookForm">
+        <label for="bookTitle">Book title *</label>
+        <input id="bookTitle" type="text" required
+          placeholder="Enter the book title"
+          style="display:block;width:100%;padding:12px;margin:8px 0 16px;border:1px solid #ccc;border-radius:8px;">
+
+        <label for="bookAuthor">Author</label>
+        <input id="bookAuthor" type="text"
+          placeholder="Enter the author's name"
+          style="display:block;width:100%;padding:12px;margin:8px 0 16px;border:1px solid #ccc;border-radius:8px;">
+
+        <label for="bookDescription">Short description</label>
+        <textarea id="bookDescription" rows="3"
+          placeholder="Tell us a little about the book"
+          style="display:block;width:100%;padding:12px;margin:8px 0 16px;border:1px solid #ccc;border-radius:8px;"></textarea>
+
+        <button class="button button-primary" type="submit">
+          Add book to catalogue
+        </button>
+        <p id="bookMessage" role="status"></p>
+      </form>
+    </section>
+
+    <script>
+      document.getElementById("addBookForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const title = document.getElementById("bookTitle").value.trim();
+        const author = document.getElementById("bookAuthor").value.trim();
+        const description = document.getElementById("bookDescription").value.trim();
+
+        if (!title) return;
+
+        const card = document.createElement("article");
+        card.className = "action-card";
+
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+        card.appendChild(heading);
+
+        if (author) {
+          const authorText = document.createElement("p");
+          authorText.textContent = "Author: " + author;
+          card.appendChild(authorText);
+        }
+
+        if (description) {
+          const descriptionText = document.createElement("p");
+          descriptionText.textContent = description;
+          card.appendChild(descriptionText);
+        }
+
+        const status = document.createElement("p");
+        status.textContent = "📗 Sample listing";
+        card.appendChild(status);
+
+        document.querySelector("#catalogue .actions").appendChild(card);
+
+        document.getElementById("bookMessage").textContent =
+          "Your sample book has been added to the catalogue!";
+        document.getElementById("addBookForm").reset();
+      });
+    </script>
+
     <div class="note">
       <strong>💛 A little book kindness goes a long way.</strong><br>
       Borrow with care, agree on a handover with the owner,
